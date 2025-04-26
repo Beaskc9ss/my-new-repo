@@ -4,6 +4,7 @@ permissions:
   contents: write
 
 on:
+  workflow_dispatch:
   schedule:
     - cron: '*/5 * * * *'
 
@@ -14,7 +15,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          persist-credentials: false
           fetch-depth: 0
 
       - name: Set up Git user
@@ -29,5 +29,5 @@ jobs:
       - name: Commit and push changes
         run: |
           git add LustUpdate
-          git commit -m "[bot] Update LustUpdate file" || echo "No changes to commit"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git HEAD:${{ github.ref }}
+          git commit -m "Update" || echo "No changes to commit"
+          git push
